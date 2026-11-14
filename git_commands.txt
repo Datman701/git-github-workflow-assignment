@@ -1,0 +1,120 @@
+GIT COMMANDS USED IN THIS ASSIGNMENT
+===================================
+
+Repository: git-github-workflow-assignment
+
+--- Step 1: Local repository setup ---
+
+mkdir git-github-workflow-assignment
+    Creates the project folder (done once, from the Projects directory).
+
+cd git-github-workflow-assignment
+    Moves the terminal into the project folder so all Git commands run there.
+
+git init -b main
+    Initialises an empty Git repository in the current folder and names the
+    first branch "main".
+
+git config user.name "Pateel Deepesh Kumar Reddy"
+    Sets the author name recorded on commits in this repository.
+
+git config user.email "deepu.datman@gmail.com"
+    Sets the author email recorded on commits in this repository.
+
+git add index.html about.html
+    Stages the two HTML files so they are included in the next commit.
+
+git commit -m "Initial commit: add index.html and about.html"
+    Records the staged files as the first commit (the baseline state).
+
+--- Step 2: Git workflow execution ---
+
+git status
+    Shows the working tree state: which files are modified, staged or untracked.
+
+git diff --stat
+    Summarises how many lines changed in each modified file before staging.
+
+git add about.html style.css
+    Stages the edited about page and the new stylesheet for the second commit.
+
+git commit -m "Update about page content and add site stylesheet"
+    Creates the second commit containing the page update.
+
+git log --oneline --decorate
+    Lists commits one per line, with short hashes and branch/tag pointers.
+
+git checkout -b feature
+    Creates the "feature" branch and switches to it in one step.
+
+git branch -vv
+    Lists local branches with the commit each one points to.
+
+git add index.html
+    Stages the home page change made on the feature branch.
+
+git commit -m "Add navigation and feature list to home page"
+    Commits the feature branch work, keeping it isolated from main.
+
+git checkout main
+    Switches back to the main branch (the feature work is not visible here).
+
+git merge --no-ff feature -m "Merge branch 'feature' into main"
+    Merges the feature branch into main and forces a merge commit so the
+    branch activity stays visible in history.
+
+git log --oneline --decorate --graph --all
+    Shows the full history of all branches as an ASCII graph.
+
+--- Step 3: .gitignore ---
+
+git status --short
+    Shows a compact list of changed and untracked files.
+
+git status --short --ignored
+    Also lists ignored paths, proving app.log and temp/ are excluded.
+
+git add .gitignore
+    Stages the new ignore rules.
+
+git commit -m "Add .gitignore for log files and temp folder"
+    Commits the .gitignore file to the repository.
+
+--- Step 4: Undo operation ---
+
+git add notes.txt
+    Stages a throwaway file that is about to be committed and then undone.
+
+git commit -m "Add temporary notes file"
+    Creates a commit that will be removed in the next step.
+
+git log --oneline --decorate -4
+    Confirms the temporary commit is at the top of history.
+
+git reset --soft HEAD~1
+    Undoes the last commit while keeping its changes staged in the index;
+    HEAD moves back to the previous commit.
+
+git restore --staged notes.txt
+    Unstages the file left over from the undone commit.
+
+rm notes.txt
+    Deletes the throwaway file so the working tree returns to its clean state.
+
+--- Step 5: GitHub integration ---
+
+gh repo create git-github-workflow-assignment --public --source=. --push
+    Creates the public GitHub repository, adds it as the "origin" remote and
+    pushes the main branch in one command.
+
+git remote -v
+    Displays the remote name and URL that the local repository pushes to.
+
+git push -u origin feature
+    Pushes the feature branch to GitHub and links it to the remote branch.
+
+git remote show origin
+    Confirms the remote URL, tracked branches and fetch/push configuration.
+
+git status -sb
+    Shows the current branch and whether it is ahead of or behind origin.
